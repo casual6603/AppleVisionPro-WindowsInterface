@@ -18,7 +18,7 @@ vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 
 with mp_hands.Hands(
-    model_complexity=0,
+    model_complexity=1,
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5) as hands:
     while vid.isOpened():
@@ -41,7 +41,7 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_landmarks_style(),
                     mp_drawing_styles.get_default_hand_connections_style())
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
-        if cv2.waitKey(5) & 0xFF == 27:
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 vid.release()
 
