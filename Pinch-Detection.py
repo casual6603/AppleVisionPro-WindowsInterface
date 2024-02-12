@@ -2,6 +2,11 @@ import numpy as np
 import cv2 
 import mediapipe as mp
 
+
+#r gonna be using joint movemets instead of a deep learning network so im pretty sure that i dont need all the images
+
+
+
 vid = cv2.VideoCapture(0)
 vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
