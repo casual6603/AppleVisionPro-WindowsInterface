@@ -1,7 +1,9 @@
 import cv2 
-
+import mediapipe as mp
 
 vid = cv2.VideoCapture(0)
+vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 
 while True:
     ret, frame = vid.read()
