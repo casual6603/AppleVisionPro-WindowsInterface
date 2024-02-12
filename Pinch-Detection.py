@@ -24,10 +24,12 @@ x_thumb = 0
 y_thumb = 0
 rouneded_x_Index_finger = 0
 rouneded_x_thumb = 0
-rouneded_y_Index_finger = 0
+roundeded_y_Index_finger = 0
 rouneded_y_thumb = 0
 upper_bound_x = 0
 lower_bound_x = 1000
+upper_bound_y = 0
+lower_bound_y = 1000
 
 
 with mp_hands.Hands(
@@ -68,15 +70,23 @@ with mp_hands.Hands(
 
             rouneded_x_Index_finger = round(x_Index_finger, 4)
             rouneded_x_thumb = round(x_thumb, 4)
-            print(rouneded_x_Index_finger, rouneded_x_thumb)
+
+            roundeded_y_Index_finger = round(y_Index_finger, 4)
+            rouneded_y_thumb = round(y_thumb, 4)
+            print(roundeded_y_Index_finger, rouneded_y_thumb)
 
 
-        upper_bound_x = x_Index_finger + 0.01
-        lower_bound_x = x_Index_finger - 0.01
-        #print(upper_bound_x, lower_bound_x)
-        if upper_bound_x > rouneded_x_Index_finger > lower_bound_x:
-            print("detected")
+        upper_bound_x = x_Index_finger * 1.02
+        lower_bound_x = x_Index_finger * 0.98
+        upper_bound_y = y_Index_finger * 1.1
+        lower_bound_y = y_Index_finger * 0.9
 
+
+
+        print(upper_bound_y, lower_bound_y)
+        if upper_bound_x > rouneded_x_Index_finger and rouneded_x_Index_finger > lower_bound_x and upper_bound_x > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x:
+            if upper_bound_y > roundeded_y_Index_finger and roundeded_y_Index_finger > lower_bound_y and upper_bound_y > rouneded_y_thumb and rouneded_y_thumb > lower_bound_y:
+                pyautogui.click()
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 vid.release()
