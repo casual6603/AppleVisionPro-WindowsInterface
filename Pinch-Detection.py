@@ -2,7 +2,7 @@ import numpy as np
 import cv2 
 import mediapipe as mp
 import pyautogui 
-
+import time
 
 #I guess some of the names in mediapipe are really long so we r shortening them here
 mp_drawing = mp.solutions.drawing_utils
@@ -30,7 +30,8 @@ upper_bound_x = 0
 lower_bound_x = 1000
 upper_bound_y = 0
 lower_bound_y = 1000
-
+x = 500
+y = 500
 
 with mp_hands.Hands(
     model_complexity=1,
@@ -86,7 +87,8 @@ with mp_hands.Hands(
         print(upper_bound_y, lower_bound_y)
         if upper_bound_x > rouneded_x_Index_finger and rouneded_x_Index_finger > lower_bound_x and upper_bound_x > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x:
             if upper_bound_y > roundeded_y_Index_finger and roundeded_y_Index_finger > lower_bound_y and upper_bound_y > rouneded_y_thumb and rouneded_y_thumb > lower_bound_y:
-                pyautogui.click()
+                print("yea")
+                pyautogui.moveTo(100, 200)   
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 vid.release()
