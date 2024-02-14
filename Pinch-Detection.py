@@ -134,7 +134,7 @@ with mp_hands.Hands(
         if upper_bound_x > rouneded_x_Index_finger and rouneded_x_Index_finger > lower_bound_x and upper_bound_x > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x:
             if upper_bound_y > roundeded_y_Index_finger and roundeded_y_Index_finger > lower_bound_y and upper_bound_y > rouneded_y_thumb and rouneded_y_thumb > lower_bound_y:
                 current_time = time.time()
-                if current_time - last_click_time_left > 0.5:  # Check if 2 seconds have passed since the last click
+                if current_time - last_click_time_left > 0.1:  # Check if 2 seconds have passed since the last click
                     print("L")
                     pyautogui.click()
                     last_click_time_left = current_time  # Update the last click time
@@ -143,12 +143,14 @@ with mp_hands.Hands(
         if upper_bound_x_right > rounded_x_middle_finger and rounded_x_middle_finger > lower_bound_x_right and upper_bound_x_right > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x_right:
             if upper_bound_y_right > rounded_y_middle_finger and rounded_y_middle_finger > lower_bound_y_right and upper_bound_y_right > rouneded_y_thumb and rouneded_y_thumb > lower_bound_y_right:
                 current_time_right = time.time()
-                if current_time_right - last_click_time_right > 0.5:  # Check if 2 seconds have passed since the last click
+                if current_time_right - last_click_time_right > 0.1:  # Check if 2 seconds have passed since the last click
                     print("Right Click Detected")
                     pyautogui.click(button='right')  # right-click the mouse
                     last_click_time_right = current_time_right  # Update the last click time
 
 
+
+#Click and Drag Support 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 vid.release()
