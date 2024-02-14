@@ -137,7 +137,7 @@ with mp_hands.Hands(
                 if current_time - last_click_time_left > 0.5:  # Check if 2 seconds have passed since the last click
                     print("L")
                     pyautogui.click()
-                    last_click_time = current_time  # Update the last click time
+                    last_click_time_left = current_time  # Update the last click time
 
 #right click support 
         if upper_bound_x_right > rounded_x_middle_finger and rounded_x_middle_finger > lower_bound_x_right and upper_bound_x_right > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x_right:
