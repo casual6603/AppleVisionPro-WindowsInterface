@@ -24,8 +24,11 @@ x_Index_finger = 0
 y_Index_finger = 0
 x_Middle_finger = 0
 y_Middle_finger = 0
+x_ring_finger = 0 
+y_ring_finger = 0 
 x_thumb = 0
 y_thumb = 0
+
 
 
 #rounding the x,y for the fingers
@@ -36,6 +39,8 @@ roundeded_y_Index_finger = 0
 rouneded_y_thumb = 0
 rounded_y_middle_finger = 0
 rounded_x_middle_finger = 0
+rounded_x_ring_finger = 0
+rounded_y_ring_finger = 0
 
 
 #creating bounds
@@ -97,6 +102,9 @@ with mp_hands.Hands(
                 x_Middle_finger = hand_landmarks.landmark[12].x
                 y_Middle_finger = hand_landmarks.landmark[12].y
 
+                x_ring_finger = hand_landmarks.landmark[16].x
+                y_ring_finger = hand_landmarks.landmark[16].y
+
 
 
 
@@ -109,6 +117,11 @@ with mp_hands.Hands(
 
             rounded_x_middle_finger = round(x_Middle_finger, 4)
             rounded_y_middle_finger = round(y_Middle_finger, 4)
+
+            rounded_x_ring_finger = round(x_ring_finger, 4)
+            rounded_y_ring_finger = round(y_ring_finger, 4)
+
+
 
             print(rounded_x_middle_finger, rounded_y_middle_finger)
 
@@ -126,10 +139,15 @@ with mp_hands.Hands(
         upper_bound_y_right = y_Middle_finger * 1.05 
         lower_bound_y_right = y_Middle_finger * 0.95
 
+        upper_bound_x_ring = x_ring_finger * 1.05
+        lower_bound_x_ring = x_ring_finger * 0.95
+        upper_bound_y_ring = y_ring_finger * 1.05
+        lower_bound_y_ring = y_ring_finger * 0.95
 
 
 
-#left click support
+
+#left click support with index finger and thumb pinch
         print(upper_bound_y, lower_bound_y)
         if upper_bound_x > rouneded_x_Index_finger and rouneded_x_Index_finger > lower_bound_x and upper_bound_x > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x:
             if upper_bound_y > roundeded_y_Index_finger and roundeded_y_Index_finger > lower_bound_y and upper_bound_y > rouneded_y_thumb and rouneded_y_thumb > lower_bound_y:
@@ -139,7 +157,7 @@ with mp_hands.Hands(
                     pyautogui.click()
                     last_click_time_left = current_time  # Update the last click time
 
-#right click support 
+#right click support with middle finger and thumb pinch
         if upper_bound_x_right > rounded_x_middle_finger and rounded_x_middle_finger > lower_bound_x_right and upper_bound_x_right > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x_right:
             if upper_bound_y_right > rounded_y_middle_finger and rounded_y_middle_finger > lower_bound_y_right and upper_bound_y_right > rouneded_y_thumb and rouneded_y_thumb > lower_bound_y_right:
                 current_time_right = time.time()
@@ -147,6 +165,19 @@ with mp_hands.Hands(
                     print("Right Click Detected")
                     pyautogui.click(button='right')  # right-click the mouse
                     last_click_time_right = current_time_right  # Update the last click time
+
+#drag with ring finger and thumb pinch
+        if upper_bound_x_ring > rounded_x_ring_finger and rounded_x_ring_finger > lower_bound_x_ring and upper_bound_x_ring > rouneded_x_thumb and rouneded_x_thumb > lower_bound_x_ring:
+            if upper_bound_y_ring > rounded_y_ring_finger and rounded_y_ring_finger > lower_bound_y_ring and upper_bound_y_ring> rouneded_y_thumb and rouneded_y_thumb > lower_bound_y_ring:
+                current_x, current_y = pyautogui.position()
+                x = x_ring_finger *100
+                y = y_ring_finger *100
+
+                x+= current_x
+                y+= current_y
+                pyautogui.moveTo(x, y, duration=0.0)
+                print("drag detected")
+
 
 
 
